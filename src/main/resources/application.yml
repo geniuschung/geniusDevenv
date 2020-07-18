@@ -11,4 +11,5 @@ spring:
     url: jdbc:h2:mem:test
     username: geniuschung
     password: gege0097
+    data: classpath*:data.sql
 
