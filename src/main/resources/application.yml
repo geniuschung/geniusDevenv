@@ -13,3 +13,18 @@ spring:
     password: gege0097
     data: classpath*:data.sql
 
+  jpa:
+    #database-platform: org.hibernate.dialect.H2Dialect
+    #database: H2
+    #generate-ddl: false
+    #open-in-view: false
+    ##show-sql: true
+    hibernate:
+      ddl-auto: none
+    #  naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+    #properties:
+      #hibernate.cache.use_second_level_cache: true
+      #hibernate.cache.use_query_cache: false
+      #hibernate.generate_statistics: true
+      #hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+
