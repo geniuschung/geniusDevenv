@@ -1,6 +1,6 @@
 
-create table TEST (
-ID varchar primary key,
-NAME varchar ,
-AGE NUMERIC
+create table test (
+id varchar primary key,
+name varchar,
+age number
 );

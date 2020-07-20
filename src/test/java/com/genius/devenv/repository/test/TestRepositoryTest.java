@@ -1,13 +1,13 @@
 package com.genius.devenv.repository.test;
 
 import lombok.extern.slf4j.Slf4j;
-import org.graalvm.compiler.core.match.MatchRule;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestExecutionListeners;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,6 +90,58 @@ class TestRepositoryTest {
             log.info("{} , {}, {}",testDao.getId(),testDao.getName(),testDao.getAge());
         }
         assertThat(testDaoList).isNotEmpty();
+
+    }
+
+    @Test
+    public void JPA_데이터_insert(){
+        TestDao insertTestDao = TestDao.builder().id("yoyo").name("요요").age(10L).build();
+        testRepository.save(insertTestDao);
+        Optional<TestDao> selectTestDao = testRepository.findById("yoyo");
+        selectTestDao.ifPresent(v-> log.info("{},{},{}",v.getId(),v.getName(),v.getAge()));
+
+        assertThat(selectTestDao.map(TestDao::getId).orElse(null)).isNotNull();
+        assertThat(selectTestDao.map(TestDao::getName).orElse(null)).isNotNull();
+        assertThat(selectTestDao.map(TestDao::getAge).orElse(null)).isNotNull();
+
+    }
+
+    @Test
+    public void JPA_데이터_update(){
+        Optional<TestDao> selectTestDao = testRepository.findById("geniuschung");
+        TestDao updateTestDao = selectTestDao.map(v -> v).orElseGet(TestDao::new);
+        updateTestDao.setAge(20L);
+
+        testRepository.save(updateTestDao);
+
+        Optional<TestDao> selectTestDao2 = testRepository.findById("geniuschung");
+        selectTestDao.ifPresent(v-> log.info("{},{},{}",v.getId(),v.getName(),v.getAge()));
+
+        assertThat(selectTestDao2.map(TestDao::getAge).orElse(0L)).isEqualTo(20L);
+
+
+    }
+
+    @Test
+    public void JPA_데이터_SaveAll(){
+        TestDao insertTestDao1 = TestDao.builder().id("yoyo1").name("요요").age(10L).build();
+        TestDao insertTestDao2 = TestDao.builder().id("yoyo2").name("요요").age(10L).build();
+        TestDao insertTestDao3 = TestDao.builder().id("yoyo3").name("요요").age(10L).build();
+
+        List insertList = new ArrayList<TestDao>();
+        insertList.add(insertTestDao1);
+        insertList.add(insertTestDao2);
+        insertList.add(insertTestDao3);
+
+        List<TestDao> insertedList = testRepository.saveAll(insertList);
+
+        insertedList.stream().forEach(v -> log.info("{},{},{}",v.getId(),v.getName(),v.getAge()));
+
+
+        List<TestDao> allList = testRepository.findAll();
+        allList.stream().forEach(v -> log.info("{},{},{}",v.getId(),v.getName(),v.getAge()));
+        assertThat(allList).isNotEmpty();
+        assertThat(allList.size()).isEqualTo(8);
 
     }
 
