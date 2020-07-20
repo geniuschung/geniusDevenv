@@ -6,12 +6,22 @@ spring:
     console:
       path: /h2-db
 
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    #driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+#    url: jdbc:h2:mem:test
+#    #url: jdbc:log4jdbc:h2:mem:test
+#    username: geniuschung
+#    password: gege0097
+
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:mysql://1.238.99.203:3306/geniuschung?serverTimezone=Asia/Seoul
+    #url: jdbc:mysql://192.168.35.17:3306/geniuschung?serverTimezone=Asia/Seoul
+    #url: jdbc:log4jdbc:h2:mem:test
     username: geniuschung
     password: gege0097
-
 
   jpa:
     #database-platform: org.hibernate.dialect.H2Dialect
@@ -27,5 +37,16 @@ spring:
       #hibernate.cache.use_query_cache: false
       #hibernate.generate_statistics: true
       #hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+
+#TRACE  <  DEBUG  <  INFO  <  WARN  <  ERROR
+
+logging:
+  level:
+    root: warn
+    com:
+      genius:
+        devenv:
+          repository: trace
+
 
 
