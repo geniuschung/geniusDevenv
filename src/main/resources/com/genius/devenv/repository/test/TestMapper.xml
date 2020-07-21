@@ -9,7 +9,7 @@
         SELECT ID
               ,NAME
               ,AGE
-          FROM Test
+          FROM Test2
     </select>
 
 </mapper>
