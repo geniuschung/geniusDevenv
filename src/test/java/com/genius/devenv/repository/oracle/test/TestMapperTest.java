@@ -1,4 +1,4 @@
-package com.genius.devenv.repository.test;
+package com.genius.devenv.repository.oracle.test;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -9,10 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+
 @Slf4j
 @SpringBootTest
-@Transactional
+//@Transactional
 class TestMapperTest {
     @Autowired
     private TestMapper testMapper;
