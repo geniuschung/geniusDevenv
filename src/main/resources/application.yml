@@ -12,6 +12,10 @@ datasource.oracle:
   url : jdbc:oracle:thin:@10.49.5.201:1533/LFMD
   username : LFMPLS
   password : lfmd1
+  #dirver-class-name : com.mysql.cj.jdbc.Driver
+  #url: jdbc:mysql://1.238.99.203:3306/geniuschung?serverTimezone=Asia/Seoul
+  #username: geniuschung
+  #password: gege0097
 
 
 datasource.h2:
