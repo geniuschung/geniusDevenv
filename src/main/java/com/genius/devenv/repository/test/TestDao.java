@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "TEST")
+@Table(name = "TEST2")
 public class TestDao  implements Serializable
 {
     private static final long serialVersionUID = 5667676272372629322L;

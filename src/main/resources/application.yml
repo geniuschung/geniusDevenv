@@ -6,6 +6,13 @@ spring:
     console:
       path: /h2-db
 
+  datasource:
+    driver-class-name : oracle.jdbc.driver.OracleDriver
+    url : jdbc:oracle:thin:@10.49.5.201:1533/LFMD
+    username : LFMPLS
+    password : lfmd1
+
+
 #  datasource:
 #    driver-class-name: org.h2.Driver
 #    #driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
@@ -14,14 +21,14 @@ spring:
 #    username: geniuschung
 #    password: gege0097
 
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
     #driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:mysql://1.238.99.203:3306/geniuschung?serverTimezone=Asia/Seoul
+#    url: jdbc:mysql://1.238.99.203:3306/geniuschung?serverTimezone=Asia/Seoul
     #url: jdbc:mysql://192.168.35.17:3306/geniuschung?serverTimezone=Asia/Seoul
     #url: jdbc:log4jdbc:h2:mem:test
-    username: geniuschung
-    password: gege0097
+#    username: geniuschung
+#    password: gege0097
 
   jpa:
     #database-platform: org.hibernate.dialect.H2Dialect
