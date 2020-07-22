@@ -7,15 +7,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TestRepository //extends JpaRepository<TestDao, String>
+public interface TestRepository extends JpaRepository<TestDao, String>
 {
-
+/*
     List<TestDao> findAll();
 
     TestDao save(TestDao testDao);
 
     List<TestDao> saveAll(List<TestDao> testDaoList);
-
+*/
 
     TestDao getById(String id);
 

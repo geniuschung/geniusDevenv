@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 @SpringBootTest
-//@Transactional
+@Transactional
 class TestMapperTest {
     @Autowired
     private TestMapper testMapper;
