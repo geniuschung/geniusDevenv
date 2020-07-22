@@ -8,14 +8,14 @@ server:
 #      url: jdbc:h2:mem:genius
 
 datasource.oracle:
-  driver-class-name : oracle.jdbc.driver.OracleDriver
-  url : jdbc:oracle:thin:@10.49.5.201:1533/LFMD
-  username : LFMPLS
-  password : lfmd1
-  #dirver-class-name : com.mysql.cj.jdbc.Driver
-  #url: jdbc:mysql://1.238.99.203:3306/geniuschung?serverTimezone=Asia/Seoul
-  #username: geniuschung
-  #password: gege0097
+#  driver-class-name : oracle.jdbc.driver.OracleDriver
+#  url : jdbc:oracle:thin:@10.49.5.201:1533/LFMD
+#  username : LFMPLS
+#  password : lfmd1
+  dirver-class-name : com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://1.238.99.203:3306/geniuschung?serverTimezone=Asia/Seoul
+  username: geniuschung
+  password: gege0097
 
 
 datasource.h2:
@@ -43,15 +43,20 @@ datasource.h2:
 #    username: geniuschung
 #    password: gege0097
 
-#spring:
-#  jpa:
+spring:
+  jpa:
 #    #database-platform: org.hibernate.dialect.H2Dialect
 #    #database: H2
 #    #generate-ddl: false
 #    #open-in-view: false
-#    show-sql: true
-#    hibernate:
-#      ddl-auto: none
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql : true
+        use_sql_comments : true
+
 #    #  naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
 #    #properties:
 #      #hibernate.cache.use_second_level_cache: true
@@ -65,10 +70,11 @@ datasource.h2:
 logging:
   level:
     root: info
+    org.hibernate.type.descriptor.sql: trace
     com:
       genius:
         devenv:
-          repository: debug
+          repository: info
 
 
 

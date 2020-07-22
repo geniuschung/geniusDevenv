@@ -9,17 +9,27 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
 @Slf4j
 @MapperScan(basePackages = "com.genius.devenv.repository.oracle" , sqlSessionFactoryRef = "oracleSqlSessionFactory")
+@EnableJpaRepositories(basePackages = "com.genius.devenv.repository.oracle" ,
+        entityManagerFactoryRef = "oracleEntityManagerFactory" ,
+        transactionManagerRef = "oracleTransactionManager"
+)
 public class OracleConfig {
     @Bean
     @Primary
@@ -29,6 +39,7 @@ public class OracleConfig {
     }
 
     @Bean(name="oracleDataSource")
+    @Primary
     public DataSource oracleDataSource() {
         if(oracleDataSourceProperties().getType() == HikariDataSource.class){
             return new HikariDataSource(new HikariConfig(getOracleConfigProperties()));
@@ -49,11 +60,27 @@ public class OracleConfig {
     }
 
     @Bean(name = "oracleSqlSessionFactory")
-    public SqlSessionFactory oracleSqlSessionFactory(@Qualifier("oracleDataSource") DataSource dataSource) throws Exception {
+    @Primary
+    public SqlSessionFactory oracleSqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource);
+        sqlSessionFactoryBean.setDataSource(oracleDataSource());
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         //sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mapper/oracle/**/*.xml"));
         return sqlSessionFactoryBean.getObject();
+    }
+
+    @Bean
+    @Primary
+    public LocalContainerEntityManagerFactoryBean oracleEntityManagerFactory(EntityManagerFactoryBuilder builder){
+        return builder.dataSource(oracleDataSource())
+                .packages("com.genius.devenv.repository.oracle")
+                .persistenceUnit("oracle")
+                .build();
+    }
+
+    @Bean
+    @Primary
+    public PlatformTransactionManager oracleTransactionManager(@Qualifier("oracleEntityManagerFactory") EntityManagerFactory entityManagerFactory){
+        return new JpaTransactionManager(entityManagerFactory);
     }
 }
