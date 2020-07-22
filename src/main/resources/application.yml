@@ -8,21 +8,24 @@ server:
 #      url: jdbc:h2:mem:genius
 
 datasource.oracle:
-#  driver-class-name : oracle.jdbc.driver.OracleDriver
-#  url : jdbc:oracle:thin:@10.49.5.201:1533/LFMD
-#  username : LFMPLS
-#  password : lfmd1
+  #driver-class-name : oracle.jdbc.driver.OracleDriver
+  #driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+  #url : jdbc:log4jdbc:oracle:thin:@10.49.5.201:1533/LFMD
+  #username : LFMPLS
+  #password : lfmd1
   dirver-class-name : com.mysql.cj.jdbc.Driver
+  #dirver-class-name : net.sf.log4jdbc.sql.jdbcapi.DriverSpy
   url: jdbc:mysql://1.238.99.203:3306/geniuschung?serverTimezone=Asia/Seoul
+  #url: jdbc:log4jdbc:mysql://1.238.99.203:3306/geniuschung?serverTimezone=Asia/Seoul
   username: geniuschung
   password: gege0097
 
 
 datasource.h2:
-  driver-class-name: org.h2.Driver
-  #driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-  url: jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE;INIT=RUNSCRIPT FROM 'classpath:schema.sql'\;RUNSCRIPT FROM 'classpath:data.sql'
-  #url: jdbc:log4jdbc:h2:mem:test
+  #driver-class-name: org.h2.Driver
+  driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+  #url: jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE;INIT=RUNSCRIPT FROM 'classpath:schema.sql'\;RUNSCRIPT FROM 'classpath:data.sql'
+  url: jdbc:log4jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE;INIT=RUNSCRIPT FROM 'classpath:schema.sql'\;RUNSCRIPT FROM 'classpath:data.sql'
   username: geniuschung
   password: gege0097
 
