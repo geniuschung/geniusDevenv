@@ -12,4 +12,12 @@
           FROM Test2
     </select>
 
+    <select id="findById" parameterType="String" resultType="com.genius.devenv.repository.oracle.test.TestDao">
+        SELECT ID
+              ,NAME
+              ,AGE
+          FROM Test2
+        where id = #{id}#
+    </select>
+
 </mapper>
